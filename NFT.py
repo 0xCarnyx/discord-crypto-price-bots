@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Union
 
 import requests
 
@@ -63,7 +64,7 @@ class OpenseaNFT(NFT):
         stats = self.get_stats()
         return stats.get("floor_price")
 
-    def get_volume(self, period: str) -> float:
+    def get_volume(self, period: str = "daily") -> Union[None, float]:
         stats = self.get_stats()
         if period == "daily":
             return stats.get("one_day_volume")
@@ -71,6 +72,7 @@ class OpenseaNFT(NFT):
             return stats.get("seven_day_volume")
         elif period == "monthly":
             return stats.get("thirty_day_volume")
+        return None
 
     def get_num_owners(self) -> int:
         stats = self.get_stats()
