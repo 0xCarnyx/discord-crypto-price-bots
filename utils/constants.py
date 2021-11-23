@@ -1,0 +1,2 @@
+# Symbols
+ETH = "Ξ"
