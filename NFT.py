@@ -7,6 +7,13 @@ class NFT(ABC):
     """Represents an NFT collection.
 
     """
+
+    @abstractmethod
+    def get_collection(self) -> str:
+        """Returns the classifier of the NFT collection
+        """
+        pass
+
     @abstractmethod
     def get_stats(self) -> dict:
         """Retrieves dictionary with statistics about the NFT collection. Used to retrieve detailed statistics.
@@ -42,11 +49,14 @@ class NFT(ABC):
 
 
 class OpenseaNFT(NFT):
-    def __init__(self, asset: str):
-        self.asset = asset
+    def __init__(self, collection: str):
+        self.collection = collection
+
+    def get_collection(self) -> str:
+        return self.collection
 
     def get_stats(self) -> dict:
-        response = requests.get(f"https://api.opensea.io/api/v1/collection/{self.asset}")
+        response = requests.get(f"https://api.opensea.io/api/v1/collection/{self.collection}")
         return response.json().get("collection").get("stats")
 
     def get_floor_price(self) -> float:
