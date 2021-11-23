@@ -2,3 +2,4 @@ discord
 click
 web3
 requests
+pyyaml
