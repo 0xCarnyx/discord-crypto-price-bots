@@ -1,2 +1,2 @@
-INFURA_URL: ""
+INFURA_URL: "" # Only necessary for token bots which don't rely on an API
 BOT_TOKEN: ""
