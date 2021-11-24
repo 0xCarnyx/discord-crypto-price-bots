@@ -48,7 +48,7 @@ def floor_price_bot(nft: NFT, config: Config, refresh_rate: int):
 @click.option("--platform", type=click.Choice(["opensea"]), default="opensea", show_default=True)
 @click.option("--asset", type=str, required=True, help="Name of the asset on the specified platform.")
 @click.option("--period", type=click.Choice(["daily", "weekly", "monthly"]), default="daily")
-@click.option("--refresh-rate", type=int, default=120, help="Price refresh rate in seconds.", show_default=True)
+@click.option("--refresh-rate", type=int, default=60, help="Price refresh rate in seconds.", show_default=True)
 @click.option("--config", type=Path, required=True)
 def volume_cli(platform: str, asset: str, period: str, refresh_rate: int, config: Path):
     conf = Config(config)
