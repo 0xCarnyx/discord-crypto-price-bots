@@ -1,5 +1,5 @@
 # Ticker symbols
-ETH = "Ξ"
+ETH_SYMBOL = "Ξ"
 # Trend symbols
 PUMPING = "🡽"
 DUMPING = "🡾"
