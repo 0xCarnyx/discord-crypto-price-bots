@@ -72,6 +72,7 @@ def volume_bot(nft: NFT, config: Config, period: str, refresh_rate: int):
 
 
 nft_bot_cli.add_command(floor_price_cli)
+nft_bot_cli.add_command(volume_cli)
 
 
 if __name__ == "__main__":
