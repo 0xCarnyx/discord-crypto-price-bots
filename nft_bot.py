@@ -35,12 +35,6 @@ def floor_price_cli(platform: str, asset: str, refresh_rate: int, config: Path):
 def floor_price_bot(nft: NFT, config: Config, refresh_rate: int):
     bot = commands.Bot(command_prefix="!")
 
-    @bot.event
-    async def on_ready():
-        floor_price = nft.get_floor_price(pretty_print=True)
-        for guild in bot.guilds:
-            await bot.get_guild(guild).me.edit(nick=floor_price)
-
     @tasks.loop(seconds=refresh_rate)
     async def update_floor_price():
         floor_price = nft.get_floor_price()
@@ -67,12 +61,6 @@ def volume_cli(platform: str, asset: str, period: str, refresh_rate: int, config
 
 def volume_bot(nft: NFT, config: Config, period: str, refresh_rate: int):
     bot = commands.Bot(command_prefix="!")
-
-    @bot.event
-    async def on_ready():
-        volume = nft.get_volume(period, pretty_print=True)
-        for guild in bot.guilds:
-            await bot.get_guild(guild).me.edit(nick=volume)
 
     @tasks.loop(seconds=refresh_rate)
     async def update_volume():
