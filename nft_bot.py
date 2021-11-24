@@ -11,7 +11,7 @@ logging.basicConfig(format="%(name)s - %(levelname)s - %(message)s")
 
 @click.command("nft-floor-price-bot", help="Stats a Discord price bot for NFT collections.")
 @click.option("--platform", type=click.Choice(["OpenSea"]), default="OpenSea", show_default=True)
-@click.option("--asset", type="str", required=True, help="Name of the asset on the specified platform.")
+@click.option("--asset", type=str, required=True, help="Name of the asset on the specified platform.")
 @click.option("--refresh-rate", type=int, default=120, help="Price refresh rate in seconds.", show_default=True)
 def nft_bot_cli(platform: str, asset: str, refresh_rate: int):
     if platform == "OpenSea":
