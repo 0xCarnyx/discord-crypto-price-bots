@@ -1,3 +1,5 @@
+import utils.constants as constants
+
 from abc import ABC, abstractmethod
 from typing import Union
 
@@ -24,10 +26,10 @@ class NFT(ABC):
         pass
 
     @abstractmethod
-    def get_floor_price(self) -> float:
+    def get_floor_price(self, pretty_print: bool) -> float:
         """Retrieves the current floor price in ETH for the NFT collection.
 
-        :return: Floor price in ETH
+        :return: Floor price in ETH as float or pretty printed string
         """
         pass
 
@@ -60,8 +62,10 @@ class OpenseaNFT(NFT):
         response = requests.get(f"https://api.opensea.io/api/v1/collection/{self.collection}")
         return response.json().get("collection").get("stats")
 
-    def get_floor_price(self) -> float:
+    def get_floor_price(self, pretty_print: bool) -> Union[str, float]:
         stats = self.get_stats()
+        if pretty_print:
+            return f"Floor Price: {stats.get('floor_price')}{constants.ETH}"
         return stats.get("floor_price")
 
     def get_volume(self, period: str = "daily") -> Union[None, float]:
