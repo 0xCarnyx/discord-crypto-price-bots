@@ -31,17 +31,13 @@ def api_token_price_cli(ticker: str, refresh_rate: int, config: Path):
 
 
 @click.command("weth-pool-token-price", help="Starts a Discord price bot for a token. Gets price from LP pool.")
-@click.option("--pool-contract", type=str, required=True,
-              help="Contract of the LP pool from which price should get retrieved.")
-@click.option("--token-contract", type=str, required=True,
-              help="Contract of the token for which the price should get retrieved.")
 @click.option("--refresh-rate", type=int, default=120, help="Price refresh rate in seconds.", show_default=True)
 @click.option("--config", type=Path, required=True)
-def contract_token_price_cli(pool_contract: str, token_contract: str, refresh_rate: int, config: Path):
+def contract_token_price_cli(refresh_rate: int, config: Path):
     conf = Config(config)
     w3 = Web3(Web3.HTTPProvider(conf.infura_url))
 
-    token = WETHPairedToken(pool_contract, token_contract, w3)
+    token = WETHPairedToken(conf.pool_contract, conf.token_contract, w3)
     token_price_bot(token, conf, refresh_rate)
 
 
