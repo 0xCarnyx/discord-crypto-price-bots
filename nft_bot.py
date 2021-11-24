@@ -36,9 +36,10 @@ def floor_price_bot(nft: NFT, config: Config, refresh_rate: int):
 
     @tasks.loop(seconds=refresh_rate)
     async def update_floor_price():
-        floor_price = nft.get_floor_price()
+        floor_price = nft.get_floor_price(pretty_print=True)
         for guild in bot.guilds:
-            await bot.get_guild(guild.id).me.edit(nick=floor_price)
+            me = bot.get_guild(guild.id).me
+            await me.edit(nick=floor_price)
 
     update_floor_price.start()
     bot.run(config.bot_token)
@@ -65,7 +66,8 @@ def volume_bot(nft: NFT, config: Config, period: str, refresh_rate: int):
     async def update_volume():
         volume = nft.get_volume(period, pretty_print=True)
         for guild in bot.guilds:
-            await bot.get_guild(guild).me.edit(nick=volume)
+            me = bot.get_guild(guild.id).me
+            await me.edit(nick=volume)
 
     update_volume.start()
     bot.run(config.bot_token)
