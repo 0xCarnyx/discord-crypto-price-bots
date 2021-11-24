@@ -29,15 +29,17 @@ class NFT(ABC):
     def get_floor_price(self, pretty_print: bool) -> float:
         """Retrieves the current floor price in ETH for the NFT collection.
 
+        :param pretty_print: Whether to return the raw value of a formatted string
         :return: Floor price in ETH as float or pretty printed string
         """
         pass
 
     @abstractmethod
-    def get_volume(self, period: str) -> float:
+    def get_volume(self, period: str, pretty_print: bool) -> float:
         """Retrieves the volume in ETH of the NFT collection during a given time period.
 
         :param period: Time period
+        :param pretty_print: Whether to return the raw value of a formatted string
         :return: Volume in ETH during the given time period
         """
         pass
@@ -68,15 +70,20 @@ class OpenseaNFT(NFT):
             return f"Floor Price: {stats.get('floor_price')}{constants.ETH}"
         return stats.get("floor_price")
 
-    def get_volume(self, period: str = "daily") -> Union[None, float]:
+    def get_volume(self, period: str, pretty_print: bool) -> Union[None, float]:
         stats = self.get_stats()
         if period == "daily":
-            return stats.get("one_day_volume")
+            volume = stats.get("one_day_volume")
         elif period == "weekly":
-            return stats.get("seven_day_volume")
+            volume = stats.get("seven_day_volume")
         elif period == "monthly":
-            return stats.get("thirty_day_volume")
-        return None
+            volume = stats.get("thirty_day_volume")
+        else:
+            return None
+
+        if pretty_print:
+            f"{period.capitalize()} Volume: {volume}{constants.ETH}"
+        return volume
 
     def get_num_owners(self) -> int:
         stats = self.get_stats()
