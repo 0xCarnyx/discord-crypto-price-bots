@@ -1,4 +1,4 @@
-import NFT as NFT
+from entities import NFT as NFT
 from utils.config import Config
 
 import logging
