@@ -1,5 +1,5 @@
-# levxdao-price-bot
-Price bot for the LEVX DAO discord channel
+# discord-crypto-price-bots
+Discord bots for showing various metrics (price, volume, ...) for NFTs and crypto tokens. Originally designed for the LEVX DAO discord.
 
 ## Available bots
 * 
