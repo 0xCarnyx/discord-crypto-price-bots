@@ -1,5 +1,6 @@
 # Credentials and endpoints
 BOT_TOKEN: "" # Discord bot token
+INFURA_URL: ""
 
 # Token
 ## Contracts
