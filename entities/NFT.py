@@ -67,8 +67,8 @@ class OpenseaNFT(NFT):
     def get_floor_price(self, pretty_print: bool) -> Union[str, float]:
         stats = self.get_stats()
         if pretty_print:
-            return f"{stats.get('floor_price')}{constants.ETH_SYMBOL}"
-        return stats.get("floor_price")
+            return f"{round(stats.get('floor_price'), 2)}{constants.ETH_SYMBOL}"
+        return round(stats.get("floor_price"), 2)
 
     def get_volume(self, period: str, pretty_print: bool) -> Union[None, float, str]:
         stats = self.get_stats()
@@ -82,8 +82,8 @@ class OpenseaNFT(NFT):
             return None
 
         if pretty_print:
-            return f"{str(volume)}{constants.ETH_SYMBOL}"
-        return volume
+            return f"{str(round(volume, 2))}{constants.ETH_SYMBOL}"
+        return round(volume, 2)
 
     def get_num_owners(self) -> int:
         stats = self.get_stats()
