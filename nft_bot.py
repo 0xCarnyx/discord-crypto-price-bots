@@ -43,7 +43,7 @@ def floor_price_bot(nft: NFT, config: Config, refresh_rate: int):
                 me = bot.get_guild(guild.id).me
                 await me.edit(nick=floor_price)
                 await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
-                                                                    name="Floor Price"))
+                                                                    name="FLOOR PRICE"))
 
     update_floor_price.start()
     bot.run(config.bot_token)
@@ -74,7 +74,7 @@ def volume_bot(nft: NFT, config: Config, period: str, refresh_rate: int):
                 me = bot.get_guild(guild.id).me
                 await me.edit(nick=volume)
                 await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
-                                                                    name=f"{period.capitalize()} Volume"))
+                                                                    name=f"{period.upper()} VOLUME"))
 
     update_volume.start()
     bot.run(config.bot_token)

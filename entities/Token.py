@@ -13,6 +13,10 @@ class Token(ABC):
     def get_price(self, pretty_print: bool) -> Union[Tuple[str, str], Tuple[float, float]]:
         pass
 
+    @abstractmethod
+    def get_volume(self, pretty_print: bool):
+        pass
+
 
 class WETHPairedToken(Token):
     def __init__(self, lp_contract: str, token: str, w3):
@@ -36,8 +40,11 @@ class WETHPairedToken(Token):
         current_eth_price = APIToken("ethereum").get_price(pretty_print=False)
         usd_price = round(price_in_eth * current_eth_price, 2)
         if pretty_print:
-            return f"Price: ${usd_price}"
+            return f"${usd_price}"
         return usd_price
+
+    def get_volume(self, pretty_print: bool):
+        pass
 
 
 class APIToken(Token):
@@ -52,3 +59,12 @@ class APIToken(Token):
             formatted_price = f"{constants.USD}{usd_price}"
             return formatted_price
         return usd_price
+
+    def get_volume(self, pretty_print: bool):
+        response = requests.get(f"https://api.coingecko.com/api/v3/coins/{self.ticker}?localization=false&tickers=false"
+                                f"&community_data=false&developer_data=false&sparkline=false")
+        response_data = response.json()
+        usd_volume = round(response_data.get("market_data").get("total_volume").get("usd"), 2)
+        if pretty_print:
+            return f"{constants.USD}{usd_volume}"
+        return usd_volume
