@@ -3,6 +3,7 @@ BOT_TOKEN: "" # Discord bot token
 INFURA_URL: ""
 
 # Token
+TOKEN_NAME: ""
 ## Contracts
 POOL_CONTRACT: ""
 TOKEN_CONTRACT: ""

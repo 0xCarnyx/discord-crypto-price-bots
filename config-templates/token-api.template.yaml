@@ -2,5 +2,6 @@
 BOT_TOKEN: "" # Discord bot token
 
 # Token
+TOKEN_NAME: ""
 ## Coingecko API parameters
 API_ID: "" # Coingecko API id for token. Can be found on the Coingecko website

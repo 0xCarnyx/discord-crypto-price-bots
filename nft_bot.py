@@ -5,6 +5,7 @@ import logging
 from pathlib import Path
 
 import click
+import discord
 from discord.ext import commands, tasks
 
 logging.basicConfig(format="%(name)s - %(levelname)s - %(message)s")
@@ -37,9 +38,12 @@ def floor_price_bot(nft: NFT, config: Config, refresh_rate: int):
     @tasks.loop(seconds=refresh_rate)
     async def update_floor_price():
         floor_price = nft.get_floor_price(pretty_print=True)
-        for guild in bot.guilds:
-            me = bot.get_guild(guild.id).me
-            await me.edit(nick=floor_price)
+        if floor_price is not None:
+            for guild in bot.guilds:
+                me = bot.get_guild(guild.id).me
+                await me.edit(nick=floor_price)
+                await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
+                                                                    name="Floor Price"))
 
     update_floor_price.start()
     bot.run(config.bot_token)
@@ -64,10 +68,13 @@ def volume_bot(nft: NFT, config: Config, period: str, refresh_rate: int):
 
     @tasks.loop(seconds=refresh_rate)
     async def update_volume():
-        volume = nft.get_volume(period, pretty_print=True)
-        for guild in bot.guilds:
-            me = bot.get_guild(guild.id).me
-            await me.edit(nick=volume)
+        volume = nft.get_volume(period=period, pretty_print=True)
+        if volume is not None:
+            for guild in bot.guilds:
+                me = bot.get_guild(guild.id).me
+                await me.edit(nick=volume)
+                await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
+                                                                    name=f"{period.capitalize()} Volume"))
 
     update_volume.start()
     bot.run(config.bot_token)

@@ -9,6 +9,8 @@ class Config:
     infura_url: str
     bot_token: str
 
+    token_name: str
+
     pool_contract: str
     token_contract: str
 
@@ -21,6 +23,8 @@ class Config:
             config = yaml.safe_load(fp)
         self.infura_url = config.get("INFURA_URL")
         self.bot_token = config.get("BOT_TOKEN")
+
+        self.token_name = config.get("TOKEN_NAME")
 
         self.pool_contract = config.get("POOL_CONTRACT")
         self.token_contract = config.get("TOKEN_CONTRACT")
