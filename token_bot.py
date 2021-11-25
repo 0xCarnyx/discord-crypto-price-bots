@@ -23,8 +23,9 @@ def token_bot_cli(**kwargs):
 @click.option("--ticker", type=str, required=True, help="Ticker of the token on CoinGecko.")
 @click.option("--refresh-rate", type=int, default=120, help="Price refresh rate in seconds.", show_default=True)
 @click.option("--config", type=Path, required=True)
-def api_token_price_cli(ticker: str, refresh_rate: int, config: Path):
+def api_token_price_cli(refresh_rate: int, config: Path):
     conf = Config(config)
+    ticker = conf.api_id
 
     token = APIToken(ticker)
     token_price_bot(token, conf, refresh_rate)

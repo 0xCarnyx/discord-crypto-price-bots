@@ -5,3 +5,6 @@ BOT_TOKEN: ""
 # Contracts (only necessary when creating a token price bot which uses the LP pool for price retrieval
 POOL_CONTRACT: ""
 TOKEN_CONTRACT: ""
+
+# Coingecko API parameters
+API_ID: ""
