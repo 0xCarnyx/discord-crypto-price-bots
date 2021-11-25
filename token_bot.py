@@ -56,8 +56,15 @@ def contract_token_price_cli(refresh_rate: int, config: Path):
 def token_volume_bot(token: Token, config: Config, refresh_rate: int):
     bot = commands.Bot(command_prefix="!")
 
+    @bot.event
+    async def on_ready():
+        await update()
+
     @tasks.loop(seconds=refresh_rate)
     async def update_volume():
+        await update()
+
+    async def update():
         price = token.get_volume(pretty_print=True)
         if price is not None:
             for guild in bot.guilds:
@@ -73,8 +80,15 @@ def token_volume_bot(token: Token, config: Config, refresh_rate: int):
 def token_price_bot(token: Token, config: Config, refresh_rate: int):
     bot = commands.Bot(command_prefix="!")
 
+    @bot.event
+    async def on_ready():
+        await update()
+
     @tasks.loop(seconds=refresh_rate)
     async def update_price():
+        await update()
+
+    async def update():
         price = token.get_price(pretty_print=True)
         if price is not None:
             for guild in bot.guilds:
