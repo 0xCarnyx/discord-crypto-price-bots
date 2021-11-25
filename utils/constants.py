@@ -1,5 +1,8 @@
 # Ticker symbols
 ETH_SYMBOL = "Ξ"
+# FIAT symolbs
+USD = "$"
+US_CENT = "¢"
 # Trend symbols
 PUMPING = "🡽"
 DUMPING = "🡾"
