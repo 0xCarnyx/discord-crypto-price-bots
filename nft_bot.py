@@ -20,14 +20,14 @@ def nft_bot_cli(**kwargs):
 
 @click.command("floor-price", help="Stats a Discord price bot for NFT collections.")
 @click.option("--platform", type=click.Choice(["OpenSea"]), default="OpenSea", show_default=True)
-@click.option("--asset", type=str, required=True, help="Name of the asset on the specified platform.")
 @click.option("--refresh-rate", type=int, default=120, help="Price refresh rate in seconds.", show_default=True)
 @click.option("--config", type=Path, required=True)
-def floor_price_cli(platform: str, asset: str, refresh_rate: int, config: Path):
+def floor_price_cli(platform: str, refresh_rate: int, config: Path):
     conf = Config(config)
+    collection = conf.collection
 
     if platform == "OpenSea":
-        nft = NFT.OpenseaNFT(asset)
+        nft = NFT.OpenseaNFT(collection)
         floor_price_bot(nft, conf, refresh_rate)
 
 
@@ -47,15 +47,15 @@ def floor_price_bot(nft: NFT, config: Config, refresh_rate: int):
 
 @click.command("volume", help="Stats a Discord price bot for NFT collections.")
 @click.option("--platform", type=click.Choice(["opensea"]), default="opensea", show_default=True)
-@click.option("--asset", type=str, required=True, help="Name of the asset on the specified platform.")
 @click.option("--period", type=click.Choice(["daily", "weekly", "monthly"]), default="daily")
 @click.option("--refresh-rate", type=int, default=60, help="Price refresh rate in seconds.", show_default=True)
 @click.option("--config", type=Path, required=True)
-def volume_cli(platform: str, asset: str, period: str, refresh_rate: int, config: Path):
+def volume_cli(platform: str, period: str, refresh_rate: int, config: Path):
     conf = Config(config)
+    collection = conf.collection
 
     if platform == "opensea":
-        nft = NFT.OpenseaNFT(asset)
+        nft = NFT.OpenseaNFT(collection)
         volume_bot(nft, conf, period, refresh_rate)
 
 

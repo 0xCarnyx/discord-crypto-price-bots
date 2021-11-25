@@ -14,6 +14,8 @@ class Config:
 
     api_id: str
 
+    collection: str
+
     def __init__(self, config_file: Path):
         with config_file.open("r") as fp:
             config = yaml.safe_load(fp)
@@ -24,3 +26,5 @@ class Config:
         self.token_contract = config.get("TOKEN_CONTRACT")
 
         self.api_id = config.get("API_ID")
+
+        self.collection = config.get("COLLECTION_NAME")
