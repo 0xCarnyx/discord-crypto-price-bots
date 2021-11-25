@@ -129,4 +129,6 @@ dmypy.json
 .pyre/
 
 *.yaml
-!config.template.yaml
+!config-templates/nft-opensea.template.yaml
+!config-templates/token-api.template.yaml
+!config-templates/token-lp.template.yaml

@@ -1,0 +1,7 @@
+# Credentials and endpoints
+BOT_TOKEN: "" # Discord bot token
+
+# Token
+## Contracts
+POOL_CONTRACT: ""
+TOKEN_CONTRACT: ""

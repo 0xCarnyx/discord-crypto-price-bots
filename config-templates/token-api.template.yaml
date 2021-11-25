@@ -1,0 +1,6 @@
+# Credentials and endpoints
+BOT_TOKEN: "" # Discord bot token
+
+# Token
+## Coingecko API parameters
+API_ID: "" # Coingecko API id for token. Can be found on the Coingecko website

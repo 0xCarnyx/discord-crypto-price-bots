@@ -1,0 +1,6 @@
+# Credentials and endpoints
+BOT_TOKEN: "" # Discord bot token
+
+# NFT specific
+## Opensea
+ASSET_NAME: ""
