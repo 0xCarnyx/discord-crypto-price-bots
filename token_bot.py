@@ -59,11 +59,12 @@ def token_volume_bot(token: Token, config: Config, refresh_rate: int):
     @tasks.loop(seconds=refresh_rate)
     async def update_volume():
         price = token.get_volume(pretty_print=True)
-        for guild in bot.guilds:
-            me = bot.get_guild(guild.id).me
-            await me.edit(nick=price)
-            await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
-                                                                name=f"{config.token_name} VOLUME"))
+        if price is not None:
+            for guild in bot.guilds:
+                me = bot.get_guild(guild.id).me
+                await me.edit(nick=price)
+                await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
+                                                                    name=f"{config.token_name} VOLUME"))
 
     update_volume.start()
     bot.run(config.bot_token)
@@ -75,11 +76,12 @@ def token_price_bot(token: Token, config: Config, refresh_rate: int):
     @tasks.loop(seconds=refresh_rate)
     async def update_price():
         price = token.get_price(pretty_print=True)
-        for guild in bot.guilds:
-            me = bot.get_guild(guild.id).me
-            await me.edit(nick=price)
-            await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
-                                                                name=f"{config.token_name} PRICE"))
+        if price is not None:
+            for guild in bot.guilds:
+                me = bot.get_guild(guild.id).me
+                await me.edit(nick=price)
+                await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
+                                                                    name=f"{config.token_name} PRICE"))
 
     update_price.start()
     bot.run(config.bot_token)
