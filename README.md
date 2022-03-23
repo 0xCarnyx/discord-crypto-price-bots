@@ -1,7 +1,7 @@
 # discord-crypto-price-bots
 Discord bots for showing various metrics (price, volume, ...) for NFTs and crypto tokens. Originally designed for the LEVX DAO discord.
 
-## Available bots
+## Bots (currently down)
 * [$LEVX price](https://discord.com/api/oauth2/authorize?client_id=912733687647469590&permissions=67108864&scope=bot)
 * [Sharkpunks floor price](https://discord.com/api/oauth2/authorize?client_id=913133731185831936&permissions=67108864&scope=bot)
 * [Sharkpunks weekly volume](https://discord.com/api/oauth2/authorize?client_id=913382428880568331&permissions=67108864&scope=bot)
